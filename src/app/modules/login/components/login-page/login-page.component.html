@@ -1,0 +1,50 @@
+<div class="login-page">
+
+  <h2>Login Form</h2>
+  <form novalidate (ngSubmit)="onSubmit()" class="form" [formGroup]="loginForm">
+    <div class="control">
+      <div>
+        <label for="email">Email</label>
+      </div>
+      <div>
+        <input type="email" id="email" formControlName="email">
+        <div *ngIf="isFormSubmitted && controls['email'].errors" class="text-danger">
+          <div *ngIf="controls['email'].errors['email']">Email must be valid.</div>
+          <div *ngIf="controls['email'].errors['required']">Email is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="control">
+      <div>
+        <label for="password">Password</label>
+      </div>
+      <div>
+        <input type="password" id="password" formControlName="password">
+        <div *ngIf="isFormSubmitted && controls['password'].errors" class="text-danger">
+          <div *ngIf="controls['password'].errors['required']">Password is required.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit">Enviar</button>
+    </div>
+  </form>
+
+  <h2>Users List</h2>
+  <ul>
+    <li *ngFor="let user of getUsers$ | async">
+      {{ user.email }}
+    </li>
+  </ul>
+
+  <h2>Placeholder List</h2>
+  <ul>
+    <li *ngFor="let placeholderUser of getPlaceholderUsers$ | async; index as i">
+      {{ i + 1 }} {{ placeholderUser.email }}
+    </li>
+  </ul>
+
+  <h2>Square Meters Pipe</h2>
+  {{ 121 | squareMeters }}
+
+</div>
